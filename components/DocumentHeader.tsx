@@ -15,8 +15,8 @@ const DocumentHeader: React.FC<Props> = ({ title, subTitle, logoUrl }) => {
        <div className="flex justify-between items-start w-full mb-0 text-sm font-bold leading-snug">
           <div className="text-right w-1/3">
             <p>سلطنة عمان</p>
-            <p>وزارة التربية والتعليم</p>
-            <p>المديرية العامة للتربية والتعليم لمحافظة شمال الباطنة</p>
+            <p>وزارة والتعليم</p>
+            <p>المديرية العامة التعليم لمحافظة شمال الباطنة</p>
             <p>مدرسة الإبداع للبنين (5-8)</p>
           </div>
           

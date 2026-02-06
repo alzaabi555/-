@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { SchoolSettings } from '../types';
-import { Settings, Upload, X, Shield, PenTool, Stamp, AlertTriangle } from 'lucide-react';
+import { Settings, Upload, X, Shield, PenTool, Stamp, AlertTriangle, Image as ImageIcon } from 'lucide-react';
 
 interface Props {
   settings: SchoolSettings;
@@ -35,107 +35,118 @@ const SettingsPage: React.FC<Props> = ({ settings, setSettings }) => {
   const UploadCard = ({ 
     title, 
     settingKey, 
-    icon: Icon 
+    icon: Icon,
+    description
   }: { 
     title: string, 
     settingKey: keyof SchoolSettings, 
-    icon: any 
+    icon: any,
+    description: string
   }) => {
-    const fileRef = useRef<HTMLInputElement>(null);
-    const imageSrc = settings[settingKey];
+      const fileRef = useRef<HTMLInputElement>(null);
+      const hasImage = !!settings[settingKey];
 
-    return (
-      <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 flex flex-col items-center text-center hover:shadow-md transition-shadow duration-300">
-        <div className="bg-blue-50 p-4 rounded-full mb-4 ring-4 ring-blue-50/50">
-          <Icon className="text-blue-600" size={28} />
-        </div>
-        <h3 className="font-bold text-gray-800 mb-4 text-lg">{title}</h3>
-        
-        <div className="w-full h-40 mb-6 bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl flex items-center justify-center overflow-hidden relative group transition-colors hover:border-blue-400">
-          {imageSrc ? (
-            <>
-                <img src={imageSrc} alt={title} className="max-h-full max-w-full object-contain p-2" />
-                <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <button 
-                        onClick={() => removeImage(settingKey)}
-                        className="bg-red-500 text-white p-3 rounded-full hover:bg-red-600 hover:scale-110 transition-transform shadow-lg"
+      return (
+        <div className="bg-white rounded-3xl p-6 shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center transition-transform hover:-translate-y-1 duration-300">
+             <div className="bg-slate-50 p-4 rounded-2xl mb-4 border border-slate-100">
+                <Icon size={32} className="text-slate-700" />
+             </div>
+             
+             <h3 className="text-xl font-bold text-slate-800 mb-2">{title}</h3>
+             <p className="text-sm text-slate-400 mb-6 font-medium leading-relaxed px-4">{description}</p>
+
+             <div className="w-full flex-1 flex flex-col items-center justify-center">
+                 {hasImage ? (
+                     <div className="relative group w-full h-48 bg-slate-50 rounded-2xl border-2 border-slate-200 overflow-hidden flex items-center justify-center">
+                         <img 
+                            src={settings[settingKey] as string} 
+                            alt={title} 
+                            className="max-h-full max-w-full object-contain p-2" 
+                         />
+                         <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center backdrop-blur-sm">
+                             <button 
+                                onClick={() => removeImage(settingKey)}
+                                className="bg-white/20 hover:bg-white/30 text-white p-3 rounded-full backdrop-blur-md transition-all transform hover:scale-110"
+                             >
+                                 <X size={24} />
+                             </button>
+                         </div>
+                     </div>
+                 ) : (
+                    <div 
+                        onClick={() => fileRef.current?.click()}
+                        className="w-full h-48 rounded-2xl border-2 border-dashed border-slate-300 hover:border-indigo-500 hover:bg-indigo-50/30 transition-all cursor-pointer flex flex-col items-center justify-center gap-3 group"
                     >
-                        <X size={24} />
-                    </button>
-                </div>
-            </>
-          ) : (
-            <div className="flex flex-col items-center text-gray-400 gap-2">
-                <Upload size={24} className="opacity-50" />
-                <span className="text-sm">لا توجد صورة</span>
-            </div>
-          )}
+                        <Upload size={32} className="text-slate-300 group-hover:text-indigo-500 transition-colors" />
+                        <span className="text-sm font-bold text-slate-400 group-hover:text-indigo-600">اختر صورة للرفع</span>
+                    </div>
+                 )}
+                 <input 
+                    type="file" 
+                    ref={fileRef}
+                    className="hidden" 
+                    accept="image/*" 
+                    onChange={(e) => handleImageUpload(settingKey, e)} 
+                 />
+             </div>
         </div>
-
-        <input 
-          type="file" 
-          accept="image/*" 
-          className="hidden" 
-          ref={fileRef}
-          onChange={(e) => handleImageUpload(settingKey, e)} 
-        />
-        
-        <button 
-          onClick={() => fileRef.current?.click()}
-          className="w-full flex items-center justify-center gap-2 bg-white text-blue-600 border border-blue-200 hover:bg-blue-50 hover:border-blue-300 font-bold py-3 rounded-lg transition-all duration-200 shadow-sm"
-        >
-          <Upload size={18} />
-          <span>رفع الصورة</span>
-        </button>
-        <p className="text-[10px] text-gray-400 mt-3">يفضل استخدام صور بصيغة PNG وخلفية شفافة</p>
-      </div>
-    );
+      );
   };
 
   return (
-    <div className="p-8 h-full overflow-y-auto bg-gray-50 w-full">
-      <div className="max-w-5xl mx-auto">
-        <div className="flex items-center gap-4 mb-8">
-            <div className="bg-white p-3 rounded-xl shadow-sm border border-gray-200">
-                <Settings className="text-blue-600" size={32} />
-            </div>
-            <div>
-                <h1 className="text-2xl font-bold text-gray-800">إعدادات المدرسة</h1>
-                <p className="text-gray-500 mt-1">ضبط الشعارات والأختام والتواقيع الرسمية للوثائق</p>
-            </div>
+    <div className="h-full overflow-y-auto bg-slate-50 w-full font-sans p-6 md:p-10">
+      <div className="max-w-7xl mx-auto space-y-10">
+        
+        {/* Header */}
+        <div className="flex items-center gap-4 pb-6 border-b border-slate-200">
+             <div className="bg-slate-800 p-3 rounded-2xl shadow-lg shadow-slate-300 text-white">
+                <Settings size={32} />
+             </div>
+             <div>
+                 <h1 className="text-3xl font-extrabold text-slate-800">إعدادات المدرسة</h1>
+                 <p className="text-slate-500 mt-1 font-medium">تخصيص الشعارات والتواقيع الرسمية للنماذج</p>
+             </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <UploadCard 
-                title="شعار الوزارة (الهيدر)" 
-                settingKey="ministryLogo" 
-                icon={Shield} 
-            />
+        {/* Warning Banner */}
+        <div className="bg-amber-50 border border-amber-100 rounded-2xl p-4 flex items-start gap-3">
+             <AlertTriangle className="text-amber-500 shrink-0 mt-0.5" size={20} />
+             <p className="text-sm text-amber-800 font-bold leading-relaxed">
+                ملاحظة: يتم حفظ هذه الصور محلياً في متصفحك (IndexedDB). تأكد من استخدام صور بخلفية شفافة (PNG) للحصول على أفضل النتائج عند الطباعة.
+             </p>
+        </div>
+
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             
             <UploadCard 
-                title="ختم المدرسة الرسمي" 
+                title="شعار الوزارة" 
+                settingKey="ministryLogo" 
+                icon={Shield}
+                description="يظهر في أعلى يمين جميع الوثائق الرسمية"
+            />
+
+            <UploadCard 
+                title="الختم المدرسي" 
                 settingKey="schoolStamp" 
-                icon={Stamp} 
+                icon={Stamp}
+                description="يظهر أسفل يسار الوثائق فوق التوقيع"
             />
 
             <UploadCard 
-                title="توقيع مدير المدرسة" 
+                title="توقيع المدير" 
                 settingKey="principalSignature" 
-                icon={PenTool} 
+                icon={PenTool}
+                description="يعتمد مدير المدرسة (أسفل اليسار)"
             />
 
             <UploadCard 
-                title="توقيع رئيس لجنة شؤون الطلاب" 
+                title="توقيع الأخصائي" 
                 settingKey="committeeHeadSignature" 
-                icon={PenTool} 
+                icon={PenTool}
+                description="لجنة شؤون الطلاب (أسفل اليمين)"
             />
-        </div>
 
-        <div className="mt-8 bg-amber-50 border border-amber-200 p-4 rounded-xl text-sm text-amber-800 flex items-start gap-3">
-             <AlertTriangle className="flex-shrink-0 mt-0.5" size={18} />
-             <div>
-                <strong>ملاحظة هامة:</strong> يتم حفظ هذه الصور في المتصفح محلياً فقط (IndexedDB). إذا قمت بمسح بيانات المتصفح، قد تحتاج لرفع الصور مرة أخرى.
-             </div>
         </div>
       </div>
     </div>

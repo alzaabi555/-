@@ -31,6 +31,17 @@ const DocumentFooter: React.FC<Props> = ({ data, settings, showSocialWorker = tr
           </div>
         )}
 
+        {/* Center: School Stamp (Parallel to Ministry Logo at top) */}
+        <div className="absolute inset-x-0 bottom-4 flex justify-center pointer-events-none">
+             {settings?.schoolStamp && (
+                <img 
+                    src={settings.schoolStamp} 
+                    alt="Stamp" 
+                    className="h-40 opacity-80 object-contain mix-blend-multiply" 
+                />
+            )}
+        </div>
+
         <div className="text-center relative w-1/3">
             <p className="font-bold mb-8 text-lg">مدير المدرسة</p>
             <p className="text-gray-600 text-base">يعتمد،،</p>
@@ -41,15 +52,6 @@ const DocumentFooter: React.FC<Props> = ({ data, settings, showSocialWorker = tr
                     src={settings.principalSignature} 
                     alt="Signature" 
                     className="absolute bottom-6 left-1/2 transform -translate-x-1/2 h-20 opacity-90 object-contain pointer-events-none mix-blend-multiply" 
-                />
-            )}
-            
-            {/* School Stamp Overlay */}
-            {settings?.schoolStamp && (
-                <img 
-                    src={settings.schoolStamp} 
-                    alt="Stamp" 
-                    className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-0 h-24 opacity-80 object-contain pointer-events-none mix-blend-multiply rotate-[-10deg]" 
                 />
             )}
         </div>

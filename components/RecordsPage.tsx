@@ -16,7 +16,7 @@ const RecordsPage: React.FC<Props> = ({ records, onDelete, onRestore }) => {
     const matchesSearch = 
         r.studentName.includes(searchTerm) || 
         r.grade.includes(searchTerm) || 
-        r.data.civilId.includes(searchTerm);
+        r.data.documentNumber.includes(searchTerm);
     const matchesType = filterType === 'all' || r.formType === filterType;
     return matchesSearch && matchesType;
   }).sort((a, b) => b.timestamp - a.timestamp);
@@ -55,7 +55,7 @@ const RecordsPage: React.FC<Props> = ({ records, onDelete, onRestore }) => {
             <div className="relative flex-1 group">
                 <input 
                     type="text" 
-                    placeholder="بحث في السجل (اسم، صف، رقم مدني)..." 
+                    placeholder="بحث في السجل (اسم، صف، رقم)..." 
                     className="w-full pl-10 pr-12 py-3.5 bg-slate-50 border-2 border-slate-100 focus:border-emerald-500 focus:bg-white rounded-2xl outline-none transition-all duration-300 text-slate-700 font-bold placeholder-slate-400"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}

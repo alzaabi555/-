@@ -117,7 +117,7 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
             
             <div className="mb-4 flex flex-wrap items-baseline">
                 <span>الفاضل ولي أمر الطالب : </span>
-                <DottedLine text={data.guardianName || ''} className="flex-1 min-w-[250px]" />
+                <DottedLine text={data.studentName} className="flex-1 min-w-[250px]" />
             </div>
 
             <div className="mb-4 flex flex-wrap items-baseline">
@@ -180,11 +180,22 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     <p>مدرسة الإبداع للبنين (5-8)</p>
                 </div>
 
+                {/* Center: Ministry Logo */}
+                <div className="w-1/3 flex justify-center -mt-2">
+                    {settings?.ministryLogo && (
+                        <img 
+                            src={settings.ministryLogo} 
+                            alt="Ministry Logo" 
+                            className="h-20 w-auto object-contain opacity-80" 
+                        />
+                    )}
+                </div>
+
                 {/* Left Side: Annex Info */}
-                <div className="text-left w-1/3 pt-1 pl-2">
-                    <p className="mb-2 text-center font-bold text-lg">ملحق رقم ( 3 )</p>
-                    <div className="flex flex-col items-end space-y-2 text-sm pr-2">
-                        <div className="flex gap-2"><span className="font-bold">الرقم :</span>.........</div>
+                <div className="text-left w-1/3 pt-1 pl-2 flex flex-col items-end">
+                    <p className="mb-1 font-bold text-lg">ملحق رقم ( 3 )</p>
+                    <div className="flex flex-col items-end space-y-2 text-sm">
+                        <div className="flex gap-2"><span className="font-bold">الرقم :</span><span className="font-mono">{data.documentNumber}</span></div>
                         <div className="flex gap-2"><span className="font-bold">التاريخ :</span><span dir="ltr">{data.incidentDate}</span></div>
                     </div>
                 </div>
@@ -240,24 +251,28 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                 </div>
 
                 {/* Signatures Compact */}
-                <div className="mt-8 mb-4 relative h-20">
-                    <div className="absolute left-0 top-0 text-center w-full flex justify-between px-6">
-                        <div className="text-center relative pt-1">
+                <div className="mt-8 mb-4 relative h-32">
+                    <div className="absolute left-0 top-0 w-full flex justify-between px-6">
+                        <div className="text-center relative pt-1 w-1/3">
                              <p className="text-base font-bold mb-4">عضو لجنة شؤون الطلاب</p>
                              {/* Signature Overlay */}
                              {settings?.committeeHeadSignature && (
                                 <img src={settings.committeeHeadSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-16 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
                              )}
                         </div>
-                        <div className="text-center relative pt-1">
+
+                        {/* Stamp in Center */}
+                        <div className="w-1/3 flex justify-center items-center pt-2">
+                             {settings?.schoolStamp && (
+                                <img src={settings.schoolStamp} className="h-36 opacity-80 mix-blend-multiply" alt="Stamp" />
+                             )}
+                        </div>
+
+                        <div className="text-center relative pt-1 w-1/3">
                              <p className="text-base font-bold mb-4">يعتمد مدير المدرسة</p>
                              {/* Principal Signature */}
                              {settings?.principalSignature && (
                                 <img src={settings.principalSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
-                             )}
-                             {/* Stamp */}
-                             {settings?.schoolStamp && (
-                                <img src={settings.schoolStamp} className="absolute top-8 left-0 h-20 opacity-80 mix-blend-multiply rotate-[-10deg]" alt="Stamp" />
                              )}
                         </div>
                     </div>
@@ -319,11 +334,22 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     <p>مدرسة الإبداع للبنين (5-8)</p>
                 </div>
 
+                {/* Center: Ministry Logo */}
+                <div className="w-1/3 flex justify-center -mt-2">
+                    {settings?.ministryLogo && (
+                        <img 
+                            src={settings.ministryLogo} 
+                            alt="Ministry Logo" 
+                            className="h-20 w-auto object-contain opacity-80" 
+                        />
+                    )}
+                </div>
+
                 {/* Left Side: Annex Info */}
-                <div className="text-left w-1/3 pt-1 pl-2">
-                    <p className="mb-2 text-center font-bold text-lg">ملحق رقم ( 4 )</p>
-                    <div className="flex flex-col items-end space-y-2 text-sm pr-2">
-                        <div className="flex gap-2"><span className="font-bold">الرقم :</span>.........</div>
+                <div className="text-left w-1/3 pt-1 pl-2 flex flex-col items-end">
+                    <p className="mb-1 font-bold text-lg">ملحق رقم ( 4 )</p>
+                    <div className="flex flex-col items-end space-y-2 text-sm">
+                        <div className="flex gap-2"><span className="font-bold">الرقم :</span><span className="font-mono">{data.documentNumber}</span></div>
                         <div className="flex gap-2"><span className="font-bold">التاريخ :</span><span dir="ltr">{data.incidentDate}</span></div>
                     </div>
                 </div>
@@ -386,21 +412,26 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                 </div>
 
                 {/* Signatures */}
-                <div className="mt-8 mb-4 relative h-20">
+                <div className="mt-8 mb-4 relative h-32">
                      <div className="absolute left-0 top-0 text-center w-full flex justify-between px-6">
-                        <div className="text-center relative pt-1">
+                        <div className="text-center relative pt-1 w-1/3">
                              <p className="text-base font-bold mb-4">عضو لجنة شؤون الطلاب</p>
                              {settings?.committeeHeadSignature && (
                                 <img src={settings.committeeHeadSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-16 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
                              )}
                         </div>
-                        <div className="text-center relative pt-1">
+
+                        {/* Stamp in Center */}
+                        <div className="w-1/3 flex justify-center items-center pt-2">
+                             {settings?.schoolStamp && (
+                                <img src={settings.schoolStamp} className="h-36 opacity-80 mix-blend-multiply" alt="Stamp" />
+                             )}
+                        </div>
+
+                        <div className="text-center relative pt-1 w-1/3">
                              <p className="text-base font-bold mb-4">يعتمد مدير المدرسة</p>
                              {settings?.principalSignature && (
                                 <img src={settings.principalSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
-                             )}
-                             {settings?.schoolStamp && (
-                                <img src={settings.schoolStamp} className="absolute top-8 left-0 h-20 opacity-80 mix-blend-multiply rotate-[-10deg]" alt="Stamp" />
                              )}
                         </div>
                     </div>
@@ -461,11 +492,22 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     <p>مدرسة الإبداع للبنين (5-8)</p>
                 </div>
 
+                {/* Center: Ministry Logo */}
+                <div className="w-1/3 flex justify-center -mt-2">
+                    {settings?.ministryLogo && (
+                        <img 
+                            src={settings.ministryLogo} 
+                            alt="Ministry Logo" 
+                            className="h-20 w-auto object-contain opacity-80" 
+                        />
+                    )}
+                </div>
+
                 {/* Left Side: Annex Info */}
-                <div className="text-left w-1/3 pt-1 pl-2">
-                    <p className="mb-2 text-center font-bold text-lg">ملحق رقم ( 5 )</p>
-                    <div className="flex flex-col items-end space-y-2 text-sm pr-2">
-                        <div className="flex gap-2"><span className="font-bold">الرقم :</span>.........</div>
+                <div className="text-left w-1/3 pt-1 pl-2 flex flex-col items-end">
+                    <p className="mb-1 font-bold text-lg">ملحق رقم ( 5 )</p>
+                    <div className="flex flex-col items-end space-y-2 text-sm">
+                        <div className="flex gap-2"><span className="font-bold">الرقم :</span><span className="font-mono">{data.documentNumber}</span></div>
                         <div className="flex gap-2"><span className="font-bold">التاريخ :</span><span dir="ltr">{data.incidentDate}</span></div>
                     </div>
                 </div>
@@ -473,21 +515,21 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
 
             <h1 className="text-2xl font-bold text-center mb-6 underline">استمارة إنذار طالب</h1>
 
-            <div className="px-1 text-lg leading-loose flex-1 flex flex-col">
+            <div className="px-1 text-lg leading-relaxed flex-1 flex flex-col">
                 <div className="mb-2 flex flex-wrap items-baseline">
                     <span>الفاضل ولي أمر الطالب / الطالبة : </span>
                     <DottedLine text={data.studentName} className="flex-1 font-bold min-w-[200px]" />
                     <span>المسجل / المسجلة</span>
                 </div>
-                <div className="mb-4 flex flex-wrap items-baseline">
+                <div className="mb-3 flex flex-wrap items-baseline">
                     <span>بالصف : </span>
                     <DottedLine text={data.grade} className="min-w-[100px] font-bold" />
                     <span className="ml-4">المحترم</span>
                 </div>
 
-                <p className="mb-4">السلام عليكم ورحمة الله وبركاته .. وبعد ...</p>
+                <p className="mb-3">السلام عليكم ورحمة الله وبركاته .. وبعد ...</p>
 
-                <div className="text-justify leading-loose mb-6">
+                <div className="text-justify leading-relaxed mb-4">
                     <span>إلحاقاً برسالتنا رقم ( </span>
                     <DottedLine text={data.annex5_letter1No} className="min-w-[40px] text-center font-bold" />
                     <span>) بتاريخ : </span>
@@ -504,7 +546,7 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                 </div>
 
                 {/* Inline Reasons to save vertical space */}
-                <div className="mt-2 space-y-4">
+                <div className="mt-2 space-y-2">
                      <div className="flex flex-wrap items-baseline">
                         <CheckBox checked={data.reasonLateness} />
                         <span className="font-bold mr-2 text-lg">التأخر الصباحي :</span>
@@ -524,27 +566,32 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     </div>
                 </div>
 
-                <div className="mt-8 text-center font-bold text-base bg-gray-50 p-4 border-2 border-gray-300 rounded-lg">
+                <div className="mt-6 text-center font-bold text-base bg-gray-50 p-4 border-2 border-gray-300 rounded-lg">
                     <p className="mb-2">عليه ، يرجى التكرم بمراجعة إدارة المدرسة في مدة لا تتجاوز ( 7 ) سبعة أيام من تاريخه</p>
                     <p>لمناقشة موضوع الطالب واستكمال بقية الاجراءات.</p>
                 </div>
-                 <p className="text-center mt-6 text-xl font-bold">وتفضلوا بقبول فائق الاحترام والتقدير ....</p>
+                 <p className="text-center mt-4 text-xl font-bold">وتفضلوا بقبول فائق الاحترام والتقدير ....</p>
 
-                <div className="mt-8 mb-4 relative h-20">
-                    <div className="absolute left-0 top-0 text-center w-full flex justify-between px-6">
-                        <div className="text-center relative pt-1">
+                <div className="mt-6 mb-2 relative h-32">
+                    <div className="absolute left-0 top-0 w-full flex justify-between px-6">
+                        <div className="text-center relative pt-1 w-1/3">
                              <p className="text-base font-bold mb-4">عضو لجنة شؤون الطلاب</p>
                              {settings?.committeeHeadSignature && (
                                 <img src={settings.committeeHeadSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-16 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
                              )}
                         </div>
-                        <div className="text-center relative pt-1">
+
+                         {/* Stamp in Center */}
+                         <div className="w-1/3 flex justify-center items-center pt-2">
+                             {settings?.schoolStamp && (
+                                <img src={settings.schoolStamp} className="h-36 opacity-80 mix-blend-multiply" alt="Stamp" />
+                             )}
+                        </div>
+
+                        <div className="text-center relative pt-1 w-1/3">
                              <p className="text-base font-bold mb-4">يعتمد مدير المدرسة</p>
                              {settings?.principalSignature && (
                                 <img src={settings.principalSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
-                             )}
-                             {settings?.schoolStamp && (
-                                <img src={settings.schoolStamp} className="absolute top-8 left-0 h-20 opacity-80 mix-blend-multiply rotate-[-10deg]" alt="Stamp" />
                              )}
                         </div>
                     </div>
@@ -579,13 +626,9 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                             <DottedLine className="flex-1 max-w-[150px]" />
                         </div>
                     </div>
-                </div>
-
-                <div className="mt-2 font-bold text-xs">
-                     <div className="flex gap-2">
-                        <span>نسخة إلى :</span>
-                        <span>- ملف الطالب</span>
-                     </div>
+                     <div className="flex mb-1">
+                         <span className="min-w-[100px] text-xs">نسخة إلى : ملف الطالب</span>
+                    </div>
                 </div>
 
             </div>
@@ -643,24 +686,17 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
 
   if (type === FormType.ANNEX_6_PLEDGE) {
      return (
-        <div className="h-full flex flex-col font-serif pt-4">
-            <div className="flex justify-between items-start mb-4 text-lg">
-                 <div className="text-right w-1/3"></div>
-                 <div className="w-1/3 text-center">
-                     <p className="font-bold text-xl mb-1">ملحق رقم ( 6 )</p>
-                 </div>
-                 <div className="w-1/3"></div>
-            </div>
-
-            <div className="flex justify-between items-start mb-6 text-base">
-                <div className="text-right w-1/3 order-1 leading-relaxed font-bold">
+        <div className="h-full flex flex-col font-serif relative pt-0">
+            {/* Header - Updated to match Annex 4/5 structure */}
+            <div className="flex justify-between items-start mb-4 text-sm">
+                <div className="text-right w-1/3 text-sm font-bold leading-relaxed">
                     <p>سلطنة عمان</p>
                     <p>وزارة التعليم</p>
                     <p>المديرية العامة للتعليم بمحافظة شمال الباطنة</p>
                     <p>مدرسة الإبداع للبنين (5-8)</p>
                 </div>
-                
-                <div className="w-1/3 order-2 flex justify-center -mt-6">
+
+                <div className="w-1/3 flex justify-center -mt-2">
                     {settings?.ministryLogo && (
                         <img 
                             src={settings.ministryLogo} 
@@ -670,18 +706,21 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     )}
                 </div>
 
-                <div className="text-left w-1/3 order-3 pl-2 font-bold pt-4">
-                    <div className="flex justify-end gap-2 items-center text-base">
-                        <span>العام الدراسي :</span>
-                        <span dir="ltr">{data.academicYear}</span>
+                <div className="text-left w-1/3 pt-1 pl-2 flex flex-col items-end">
+                    <p className="mb-1 font-bold text-lg">ملحق رقم ( 6 )</p>
+                    <div className="flex flex-col items-end space-y-2 text-sm">
+                        <div className="flex gap-2"><span className="font-bold">الرقم :</span><span className="font-mono">{data.documentNumber}</span></div>
+                        <div className="flex gap-2"><span className="font-bold">التاريخ :</span><span dir="ltr">{data.incidentDate}</span></div>
+                        <div className="flex gap-2"><span className="font-bold">العام الدراسي :</span><span dir="ltr">{data.academicYear}</span></div>
                     </div>
                 </div>
             </div>
 
-            <h1 className="text-2xl font-bold text-center mb-8 underline">استمارة تعهد الطالب وولي أمره</h1>
+            <h1 className="text-2xl font-bold text-center mb-6 underline">استمارة تعهد الطالب وولي أمره</h1>
 
             <div className="px-2 text-lg leading-loose flex-1 flex flex-col">
                 
+                {/* Content Body */}
                 <div className="mb-4 text-justify flex flex-wrap items-baseline">
                     <span>حضر إلى المدرسة الفاضل / الفاضلة : </span>
                     <DottedLine text={data.guardianName} className="flex-1 font-bold min-w-[200px]" />
@@ -697,15 +736,15 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     <DottedLine text={data.grade} className="min-w-[100px] text-center" />
                 </div>
 
-                <div className="mb-6 text-justify flex flex-wrap items-baseline">
+                <div className="mb-4 text-justify flex flex-wrap items-baseline">
                     <span>يوم : ............. الموافق : </span>
                     <span dir="ltr" className="mx-2 font-mono">{data.incidentDate}</span>
                     <span>، لمناقشة موضوع الإنذار الموجه إلى ابنه.</span>
                 </div>
 
-                <p className="font-bold mb-4 mt-2 text-xl">وقد تعهد الطالب وولي أمره بـ :</p>
+                <p className="font-bold mb-3 mt-2 text-xl">وقد تعهد الطالب وولي أمره بـ :</p>
 
-                <div className="space-y-4 mb-8 text-xl">
+                <div className="space-y-3 mb-4 text-xl">
                      <div className="flex items-center justify-end" dir="ltr">
                         <span className="text-right mr-3 flex-1">عدم التأخر عن موعد بدء اليوم الدراسي بدون عذر مقبول .</span>
                         <CheckBox checked={data.reasonLateness} />
@@ -720,63 +759,96 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                      </div>
                 </div>
 
-                <p className="text-justify font-bold mb-8 text-lg leading-loose">
+                <p className="text-justify font-bold mb-3 text-lg leading-loose">
                     وأنه في حال عدم التزامه ستقوم إدارة المدرسة باتخاذ الإجراء الذي تراه مناسباً وفق لائحة شؤون الطلاب.
                 </p>
 
-                <div className="flex justify-between items-start mt-8 mb-12 relative text-base">
-                     <div className="w-full flex">
-                         <div className="w-1/2 flex flex-col justify-end pb-10 relative">
-                             <p className="font-bold mb-6">توقيع عضو لجنة شؤون الطلاب المسؤول :</p>
-                            {settings?.committeeHeadSignature && (
-                                <img src={settings.committeeHeadSignature} className="absolute bottom-6 left-1/2 transform -translate-x-1/2 h-16 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
-                            )}
-                         </div>
-
-                         <div className="w-1/2 flex flex-col items-end gap-4 pl-4">
-                             <div className="flex gap-2 w-full justify-end items-baseline">
-                                 <span>: توقيع الطالب</span>
-                                 <DottedLine className="w-40" />
-                             </div>
-                             <div className="flex gap-2 w-full justify-end items-baseline">
-                                 <span>: توقيع ولي الأمر</span>
-                                 <DottedLine className="w-40" />
-                             </div>
-                             <div className="flex gap-2 w-full justify-end items-baseline">
-                                 <span dir="ltr">{data.guardianPhone}</span>
-                                 <span>: رقم الهاتف</span>
-                                 <DottedLine className="w-32" />
-                             </div>
-                             <div className="flex gap-2 w-full justify-end items-baseline">
-                                 <span dir="ltr">{data.guardianCivilId}</span>
-                                 <span>: الرقم المدني</span>
-                                 <DottedLine className="w-32" />
-                             </div>
-                             <div className="flex gap-2 w-full justify-end items-baseline">
-                                 <span dir="ltr">{data.incidentDate}</span>
-                                 <span>: التاريخ</span>
-                                 <div className="w-8"></div>
-                             </div>
-                         </div>
+                {/* Signatures Section (Students & Guardian) */}
+                <div className="mt-2 mb-6 w-2/3 pr-2 text-base">
+                     <div className="flex gap-2 w-full items-baseline mb-2">
+                         <span className="font-bold min-w-[100px]">توقيع الطالب :</span>
+                         <DottedLine className="flex-1" />
+                     </div>
+                     <div className="flex gap-2 w-full items-baseline mb-2">
+                         <span className="font-bold min-w-[100px]">توقيع ولي الأمر :</span>
+                         <DottedLine className="flex-1" />
+                     </div>
+                     <div className="flex gap-2 w-full items-baseline mb-2">
+                         <span className="font-bold min-w-[100px]">رقم الهاتف :</span>
+                         <DottedLine text={data.guardianPhone} className="flex-1 text-left" dir="ltr" />
+                     </div>
+                     <div className="flex gap-2 w-full items-baseline mb-2">
+                         <span className="font-bold min-w-[100px]">الرقم المدني :</span>
+                         <DottedLine text={data.guardianCivilId} className="flex-1 text-left" dir="ltr" />
+                     </div>
+                     <div className="flex gap-2 w-full items-baseline mb-2">
+                         <span className="font-bold min-w-[100px]">التاريخ :</span>
+                         <span dir="ltr" className="flex-1 text-center font-mono">{data.incidentDate}</span>
                      </div>
                 </div>
+                
+                {/* Official Signatures Row (Committee Member, Stamp, Principal) */}
+                <div className="relative h-40 mb-2 mt-auto">
+                    <div className="absolute left-0 top-0 w-full flex justify-between px-6 items-end h-full pb-2">
+                        
+                        {/* Right: Committee Head */}
+                        <div className="text-center relative w-1/3">
+                             <p className="text-base font-bold mb-12">توقيع عضو لجنة شؤون الطلاب المسؤول :</p>
+                             {settings?.committeeHeadSignature && (
+                                <img src={settings.committeeHeadSignature} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
+                             )}
+                        </div>
 
-                <div className="flex justify-between items-end mt-auto relative pt-4">
-                     <div className="text-center font-bold relative text-base">
-                        <p className="mb-6">يعتمد مدير المدرسة</p>
-                         {settings?.principalSignature && (
-                            <img src={settings.principalSignature} className="h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
-                        )}
-                        {settings?.schoolStamp && (
-                            <img src={settings.schoolStamp} className="absolute bottom-0 right-0 transform translate-x-1/4 translate-y-4 h-20 opacity-80 mix-blend-multiply rotate-[-10deg]" alt="Stamp" />
-                        )}
+                        {/* Center: Stamp */}
+                        <div className="w-1/3 flex justify-center items-end pb-4">
+                             {settings?.schoolStamp && (
+                                <img src={settings.schoolStamp} className="h-40 opacity-80 mix-blend-multiply" alt="Stamp" />
+                             )}
+                        </div>
 
-                     </div>
+                        {/* Left: Principal */}
+                        <div className="text-center relative w-1/3">
+                             <p className="text-base font-bold mb-12">يعتمد مدير المدرسة</p>
+                             {settings?.principalSignature && (
+                                <img src={settings.principalSignature} className="absolute bottom-4 left-1/2 transform -translate-x-1/2 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
+                             )}
+                        </div>
+                    </div>
+                </div>
 
-                     <div className="text-right font-bold text-sm">
-                        <p>: نسخة إلى</p>
-                        <p>ملف الطالب -</p>
-                     </div>
+                {/* Footer (Recipient Block) */}
+                <div className="ml-auto w-full text-sm leading-normal font-bold border-t-2 border-gray-400 pt-2" dir="rtl">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-2">
+                        <div className="flex mb-2 items-baseline">
+                            <span className="min-w-[90px]">اسم المتسلم :</span>
+                            <DottedLine text={data.annex5_recipientName} className="flex-1" />
+                        </div>
+                        <div className="flex mb-2 items-baseline">
+                            <span className="min-w-[90px]">الرقم المدني :</span>
+                            <DottedLine text={data.annex5_recipientCivilId} className="flex-1" />
+                        </div>
+                        <div className="flex mb-2 items-baseline">
+                            <span className="min-w-[90px]">صلته بالطالب :</span>
+                            <DottedLine text={data.annex5_recipientRelation} className="flex-1" />
+                        </div>
+                         <div className="flex mb-2 items-baseline">
+                             <span className="min-w-[90px]">رقم الهاتف :</span>
+                             <DottedLine text={data.annex5_recipientPhone} className="flex-1 text-left" />
+                         </div>
+                    </div>
+                    <div className="flex justify-between mt-2">
+                        <div className="flex flex-1 items-baseline">
+                             <span className="min-w-[60px]">التاريخ :</span>
+                             <span dir="ltr" className="flex-1 text-center font-mono border-b border-dotted border-black max-w-[150px]">  /  /  </span>
+                        </div>
+                        <div className="flex flex-1 items-baseline">
+                            <span className="min-w-[60px]">التوقيع :</span>
+                            <DottedLine className="flex-1 max-w-[150px]" />
+                        </div>
+                    </div>
+                     <div className="flex mb-1">
+                         <span className="min-w-[100px] text-xs">نسخة إلى : ملف الطالب</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -795,11 +867,22 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                     <p>مدرسة الإبداع للبنين (5-8)</p>
                 </div>
 
+                {/* Center: Ministry Logo */}
+                <div className="w-1/3 flex justify-center -mt-2">
+                    {settings?.ministryLogo && (
+                        <img 
+                            src={settings.ministryLogo} 
+                            alt="Ministry Logo" 
+                            className="h-20 w-auto object-contain opacity-80" 
+                        />
+                    )}
+                </div>
+
                 {/* Left Side: Annex Info */}
-                <div className="text-left w-1/3 pt-1 pl-2">
-                    <p className="mb-2 text-center font-bold text-lg">ملحق رقم ( ١٤ )</p>
-                    <div className="flex flex-col items-end space-y-2 text-sm pr-2">
-                        <div className="flex gap-2"><span className="font-bold">الرقم :</span>.........</div>
+                <div className="text-left w-1/3 pt-1 pl-2 flex flex-col items-end">
+                    <p className="mb-1 font-bold text-lg">ملحق رقم ( ١٤ )</p>
+                    <div className="flex flex-col items-end space-y-2 text-sm">
+                        <div className="flex gap-2"><span className="font-bold">الرقم :</span><span className="font-mono">{data.documentNumber}</span></div>
                         <div className="flex gap-2"><span className="font-bold">التاريخ :</span><span dir="ltr">{data.incidentDate}</span></div>
                     </div>
                 </div>
@@ -862,21 +945,26 @@ const FormRenderer: React.FC<Props> = ({ type, data, settings }) => {
                 </div>
                  <p className="text-center mt-6 text-xl font-bold">وتفضلوا بقبول فائق الاحترام والتقدير ....</p>
 
-                <div className="mt-8 mb-6 relative">
-                    <div className="flex justify-between items-start">
-                        <div className="text-right w-1/2 pl-4 relative pt-2">
-                            <p className="mb-4 text-base font-bold">توقيع عضو لجنة شؤون الطلاب المسؤول :</p>
-                            {settings?.committeeHeadSignature && (
-                                <img src={settings.committeeHeadSignature} className="absolute top-10 left-1/2 transform -translate-x-1/2 h-16 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
-                            )}
-                        </div>
-                        <div className="text-left w-1/2 pr-4 relative pt-2">
-                            <p className="font-bold mb-4 text-base">يعتمد مدير المدرسة</p>
-                             {settings?.principalSignature && (
-                                <img src={settings.principalSignature} className="absolute top-10 left-1/4 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
+                <div className="mt-8 mb-4 relative h-32">
+                    <div className="absolute left-0 top-0 w-full flex justify-between px-6">
+                        <div className="text-center relative pt-1 w-1/3">
+                             <p className="text-base font-bold mb-4">عضو لجنة شؤون الطلاب</p>
+                             {settings?.committeeHeadSignature && (
+                                <img src={settings.committeeHeadSignature} className="absolute top-6 left-1/2 transform -translate-x-1/2 h-16 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
                              )}
+                        </div>
+
+                        {/* Stamp in Center */}
+                        <div className="w-1/3 flex justify-center items-center pt-2">
                              {settings?.schoolStamp && (
-                                <img src={settings.schoolStamp} className="absolute bottom-0 left-0 h-20 opacity-80 mix-blend-multiply rotate-[-10deg]" alt="Stamp" />
+                                <img src={settings.schoolStamp} className="h-36 opacity-80 mix-blend-multiply" alt="Stamp" />
+                             )}
+                        </div>
+
+                        <div className="text-center relative pt-1 w-1/3">
+                             <p className="text-base font-bold mb-4">يعتمد مدير المدرسة</p>
+                             {settings?.principalSignature && (
+                                <img src={settings.principalSignature} className="absolute top-8 left-1/2 transform -translate-x-1/2 h-20 opacity-90 mx-auto mix-blend-multiply" alt="Sig" />
                              )}
                         </div>
                     </div>
